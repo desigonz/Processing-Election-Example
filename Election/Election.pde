@@ -25,7 +25,7 @@ void setup() {
   // create the main window
   size(WINDOW_SIZE, WINDOW_SIZE);
   // load the font
-  font = createFont("Arial",36,true);
+  font = createFont("Helvetica Neue",36,true);
   // load in the election results data
   data = new ElectionData(loadStrings("data/2012_US_election_state.csv"));
   statePostalCodes = data.getAllStatePostalCodes();
@@ -40,8 +40,8 @@ void draw() {
   if (millis() - lastStateMillis >= MILLIS_PER_STATE) {
     // reset everything
     smooth();
-    background(0);
-    fill(255);
+    background(30);
+    fill(220);
     // draw the state name
     textFont(font,36);
     textAlign(CENTER);
@@ -51,11 +51,16 @@ void draw() {
     // draw the obama vote count and title
     fill(50,50,250);  // blue
     text("Obama",WINDOW_SIZE/4,WINDOW_SIZE/2);
-    text(Math.round(state.pctForObama)+"%",WINDOW_SIZE/4,3*WINDOW_SIZE/4);
+    fill(100,100,250);
+    ellipse(WINDOW_SIZE/4, 1.25*WINDOW_SIZE/2, Math.round(state.pctForObama), Math.round(state.pctForObama));
+    fill(50,50,250);
+    text(Math.round(state.pctForObama)+"%",WINDOW_SIZE/4,3.25*WINDOW_SIZE/4);
     // draw the romney vote count and title
-    fill(201,50,50);  // red
+    fill(201,100,100);  // red
+    ellipse(3*WINDOW_SIZE/4, 1.25*WINDOW_SIZE/2, Math.round(state.pctForRomney), Math.round(state.pctForRomney));
+    fill(201,50,50);
     text("Romney",3*WINDOW_SIZE/4,WINDOW_SIZE/2);
-    text(Math.round(state.pctForRomney)+"%",3*WINDOW_SIZE/4,3*WINDOW_SIZE/4);
+    text(Math.round(state.pctForRomney)+"%",3*WINDOW_SIZE/4,3.25*WINDOW_SIZE/4);
     // update which state we're showing
     currentStateIndex = (currentStateIndex+1) % statePostalCodes.length;
     // update the last time we drew a state
